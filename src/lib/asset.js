@@ -6,7 +6,18 @@ const FIXED_RE = /đã fix|đã sửa|đã thay|đã khắc phục|da fix|da sua
 const GOOD = ['ok', 'yes', 'done'];
 const NOT_APPLICABLE = ['na', 'n/a', 'none', '-'];
 const UNKNOWN = ['unknown', 'unknow', 'chưa rõ', 'chua ro', 'chua danh gia'];
-const PORTABLE = ['laptop', 'macbook', 'mac book', 'notebook', 'mobile', 'phone', 'iphone', 'android', 'tablet', 'ipad'];
+const PORTABLE = [
+  'laptop',
+  'macbook',
+  'mac book',
+  'notebook',
+  'mobile',
+  'phone',
+  'iphone',
+  'android',
+  'tablet',
+  'ipad',
+];
 const VALUE_LABELS = {
   no: 'Không có',
   none: 'Không có',
@@ -32,7 +43,11 @@ export function batteryPercent(value) {
 
 // Battery recorded as fine but without a percentage ("OK").
 export function batteryMarkedOk(value) {
-  return GOOD.includes(String(value ?? '').trim().toLowerCase());
+  return GOOD.includes(
+    String(value ?? '')
+      .trim()
+      .toLowerCase(),
+  );
 }
 
 export function conditionText(key, value) {
@@ -62,7 +77,9 @@ function batteryLevel(s) {
 
 // 'sach' = good, 'xau' = bad, 'trong' = not assessed, 'khongap' = not applicable.
 export function conditionLevel(key, value, assetType) {
-  const v = String(value ?? '').trim().toLowerCase();
+  const v = String(value ?? '')
+    .trim()
+    .toLowerCase();
   if (v === '') return 'trong';
   if (NOT_APPLICABLE.includes(v)) return 'khongap';
   if (UNKNOWN.includes(v)) return 'trong';
@@ -91,7 +108,16 @@ export function typeGroup(assetType) {
   return 'Khác';
 }
 
-export const TYPE_GROUP_ORDER = ['Laptop Windows', 'Macbook/iMac', 'Máy bàn', 'Mobile', 'Network', 'Monitor', 'TV', 'Khác'];
+export const TYPE_GROUP_ORDER = [
+  'Laptop Windows',
+  'Macbook/iMac',
+  'Máy bàn',
+  'Mobile',
+  'Network',
+  'Monitor',
+  'TV',
+  'Khác',
+];
 
 const SALVAGE_RE = /thanh lý linh kiện|thanh ly linh kien/i;
 
@@ -165,6 +191,48 @@ export function specSummary(spec, keys = ['cpu', 'gpu', 'ram', 'storage_gb', 'sc
   return parts.join(' / ');
 }
 
+// Capacity in GB from spec text: "16GB" -> 16, "1TB + 128GB" -> 1152, "240GB x 2" -> 480, "Unknown" -> null.
+export function sizeGb(value) {
+  let total = 0;
+  let found = false;
+  for (const m of String(value ?? '')
+    .toLowerCase()
+    .matchAll(/(\d+(?:[.,]\d+)?)\s*(tb|gb)(?:\s*x\s*(\d+))?/g)) {
+    found = true;
+    total += Number(m[1].replace(',', '.')) * (m[2] === 'tb' ? 1024 : 1) * (m[3] ? Number(m[3]) : 1);
+  }
+  return found ? total : null;
+}
+
+export const CPU_FAMILY_ORDER = [
+  'Core i3',
+  'Core i5',
+  'Core i7',
+  'Core i9',
+  'Ryzen 3',
+  'Ryzen 5',
+  'Ryzen 7',
+  'Ryzen 9',
+  'Apple',
+  'Khác',
+];
+
+// CPU normalised for filtering, since the listings spell it many ways:
+// "i7 10750H" / "I79750HF" / "Intel Core i7" -> family "Core i7"; "R7-4800H" / "Ryzen7-4800H" -> "Ryzen 7 4800H".
+export function cpuInfo(cpu) {
+  const s = String(cpu ?? '').trim();
+  if (!s || SPEC_EMPTY.includes(s.toLowerCase())) return null;
+  let m = s.match(/^(?:intel\s*)?(?:core\s*)?i([3579])(?:[\s-]*(\d{4,5})([a-z]{0,2}\d?))?$/i);
+  if (m) {
+    const family = `Core i${m[1]}`;
+    return { family, model: m[2] ? `i${m[1]}-${m[2]}${m[3].toUpperCase()}` : `${family} (chưa rõ đời)` };
+  }
+  m = s.match(/^(?:amd\s*)?(?:ryzen|r)\s*([3579])[\s-]*(\d{4})([a-z]{0,2})$/i);
+  if (m) return { family: `Ryzen ${m[1]}`, model: `Ryzen ${m[1]} ${m[2]}${m[3].toUpperCase()}` };
+  if (/^m\d$/i.test(s)) return { family: 'Apple', model: `Apple ${s.toUpperCase()}` };
+  return { family: 'Khác', model: s };
+}
+
 export const CONDITION_LABELS = {
   power: 'Nguồn',
   overview: 'Tổng quan',
@@ -178,5 +246,5 @@ export const CONDITION_LABELS = {
 
 // Next valid bid: current price + step once someone has bid, otherwise the suggested price.
 export function minimumBid(asset) {
-  return asset.bid_count > 0 ? asset.current_price + asset.bid_step_effective : asset.starting_price ?? 0;
+  return asset.bid_count > 0 ? asset.current_price + asset.bid_step_effective : (asset.starting_price ?? 0);
 }

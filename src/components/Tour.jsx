@@ -43,8 +43,8 @@ const STEPS = [
         <p>Ô tìm kiếm nhận tên máy, SKU, văn phòng hoặc cấu hình (vd: i7, 16GB).</p>
         <p>
           Lọc theo <strong>Loại thiết bị</strong>, <strong>Văn phòng</strong>, <strong>Tình trạng</strong>,{' '}
-          <strong>Mức quan tâm</strong> và khoảng <strong>Giá từ / Giá đến</strong> (tính theo giá hiện tại). Trên máy
-          tính, bấm tiêu đề cột để sắp xếp.
+          <strong>Mức quan tâm</strong>, <strong>RAM</strong>, <strong>CPU</strong> và khoảng{' '}
+          <strong>Giá từ / Giá đến</strong> (tính theo giá hiện tại). Trên máy tính, bấm tiêu đề cột để sắp xếp.
         </p>
       </>
     ),

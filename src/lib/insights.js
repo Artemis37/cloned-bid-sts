@@ -8,6 +8,7 @@ import {
   conditionLevel,
   conditionText,
   isPortable,
+  sizeGb,
   statusKey,
   typeGroup,
 } from './asset.js';
@@ -27,17 +28,6 @@ function mostCommon(values) {
   const counts = new Map();
   for (const v of values) counts.set(v, (counts.get(v) || 0) + 1);
   return [...counts].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0];
-}
-
-// "1TB + 128GB" -> 1152, "240GB x 2" -> 480, "Unknown" -> null.
-function sizeGb(value) {
-  let total = 0;
-  let found = false;
-  for (const m of String(value ?? '').toLowerCase().matchAll(/(\d+(?:[.,]\d+)?)\s*(tb|gb)(?:\s*x\s*(\d+))?/g)) {
-    found = true;
-    total += Number(m[1].replace(',', '.')) * (m[2] === 'tb' ? 1024 : 1) * (m[3] ? Number(m[3]) : 1);
-  }
-  return found ? total : null;
 }
 
 // Spec text as listed, tidied: "1TB + 128GB", "16gb" -> "16GB".
@@ -147,7 +137,15 @@ function winPart(asset, capturedAtMs) {
     bidders: n === 0 ? 1 : bidders <= 1 ? 0.75 : bidders === 2 ? 0.4 : 0.15,
     duels: duels === 0 ? 1 : duels === 1 ? 0.55 : 0.25,
     recency:
-      hoursSinceLast == null ? 1 : hoursSinceLast >= 24 ? 0.9 : hoursSinceLast >= 6 ? 0.75 : hoursSinceLast >= 1 ? 0.55 : 0.35,
+      hoursSinceLast == null
+        ? 1
+        : hoursSinceLast >= 24
+          ? 0.9
+          : hoursSinceLast >= 6
+            ? 0.75
+            : hoursSinceLast >= 1
+              ? 0.55
+              : 0.35,
   };
 
   if (n === 0) {
@@ -157,13 +155,17 @@ function winPart(asset, capturedAtMs) {
     const who = bidders <= 1 ? 'từ 1 người' : `từ khoảng ${bidders} người`;
     reasons.push((n <= 2 && bidders <= 1 ? info : warn)(`${n} lượt đặt giá ${who}`));
     if (duels > 0) {
-      reasons.push(warn(`${duels} lần bị người khác vượt giá trong vòng ${RULES.duelMinutes} phút: đang có người tranh`));
+      reasons.push(
+        warn(`${duels} lần bị người khác vượt giá trong vòng ${RULES.duelMinutes} phút: đang có người tranh`),
+      );
     } else if (bids.length >= 2) {
       reasons.push(good(`Không có lượt vượt giá dồn dập (trong vòng ${RULES.duelMinutes} phút)`));
     }
     if (hoursSinceLast != null) {
       const ago =
-        hoursSinceLast < 1 ? `${Math.max(1, Math.round(hoursSinceLast * 60))} phút` : `${Math.round(hoursSinceLast)} giờ`;
+        hoursSinceLast < 1
+          ? `${Math.max(1, Math.round(hoursSinceLast * 60))} phút`
+          : `${Math.round(hoursSinceLast)} giờ`;
       const text = `Lượt cuối ${ago} trước lúc lấy dữ liệu`;
       reasons.push(hoursSinceLast < 1 ? warn(text) : info(text));
     }
@@ -215,7 +217,11 @@ function chipsFor(asset, win, value, condition) {
   const chips = [];
   if (isPortable(asset.asset_type)) {
     const pct = batteryPercent(asset.condition?.battery_pct);
-    chips.push(pct !== null ? { tone: pct >= RULES.goodBatteryPct ? 'good' : 'info', text: `Pin ${Math.round(pct)}%` } : info('Pin OK'));
+    chips.push(
+      pct !== null
+        ? { tone: pct >= RULES.goodBatteryPct ? 'good' : 'info', text: `Pin ${Math.round(pct)}%` }
+        : info('Pin OK'),
+    );
   }
   if (asset.bid_count === 0) chips.push(good('Chưa ai đặt'));
   else if (win.duels > 0) chips.push(warn('Đang bị tranh'));
@@ -267,7 +273,9 @@ export function buildInsights(assets, { modelOf, capturedAt }) {
     const win = winPart(asset, capturedAtMs);
     const value = valuePart(asset, peerPrices);
     const { weights } = RULES;
-    const score = Math.round(100 * (weights.condition * condition.score + weights.win * win.score + weights.value * value.score));
+    const score = Math.round(
+      100 * (weights.condition * condition.score + weights.win * win.score + weights.value * value.score),
+    );
 
     byId.set(asset.id, {
       id: asset.id,
