@@ -7,11 +7,13 @@ import {
   batteryPercent,
   conditionLevel,
   conditionText,
+  cpuInfo,
   isPortable,
   sizeGb,
   statusKey,
   typeGroup,
 } from './asset.js';
+import { cpuRelease } from './cpuRelease.js';
 import { formatVnd } from './format.js';
 import { RULES } from './insights-config.js';
 
@@ -175,9 +177,32 @@ function winPart(asset, capturedAtMs) {
   return { score: blend(scores, RULES.winWeights), reasons, bidders, duels };
 }
 
-function valuePart(asset, peerPrices) {
+// CPU generation: its launch date placed between the oldest and newest CPU in the same category (0..1).
+function cpuPart(asset, cpuSpan) {
+  const cpu = cpuInfo(asset.spec?.cpu);
+  if (!cpu) return { score: null, reasons: [] };
+  const release = cpuRelease(cpu.model);
+  if (!release)
+    return { score: null, reasons: [info(`Không rõ năm ra mắt của CPU "${cpu.model}", không tính vào điểm`)] };
+
   const reasons = [];
-  const scores = { suggested: null, peers: null };
+  const text = `CPU ${cpu.model} ra mắt ${release.label}`;
+  let score = 0.5;
+  if (cpuSpan && cpuSpan.max > cpuSpan.min) {
+    score = clamp01((release.year - cpuSpan.min) / (cpuSpan.max - cpuSpan.min));
+    if (score >= 0.75) reasons.push(good(`${text}, thuộc nhóm mới nhất trong loại này`));
+    else if (score <= 0.25) reasons.push(warn(`${text}, thuộc nhóm cũ nhất trong loại này`));
+    else reasons.push(info(`${text}, đời giữa trong loại này`));
+  } else {
+    reasons.push(info(text));
+  }
+  if (!release.windows11) reasons.push(warn('CPU Intel đời 7: Windows 11 không hỗ trợ chính thức'));
+  return { score, reasons, year: Math.floor(release.year) };
+}
+
+function valuePart(asset, peerPrices, cpuSpan) {
+  const reasons = [];
+  const scores = { suggested: null, peers: null, cpu: null };
   const start = asset.starting_price;
   const price = asset.current_price;
 
@@ -205,12 +230,16 @@ function valuePart(asset, peerPrices) {
     if (Math.abs(peerDiff) >= RULES.priceNoticeRatio) {
       const text = `${peerDiff > 0 ? 'Rẻ' : 'Đắt'} hơn ${Math.round(Math.abs(peerDiff) * 100)}% so với giá giữa (${formatVnd(
         typical,
-      )}đ) của ${peerPrices.length} máy cùng mẫu`;
+      )}đ) của ${peerPrices.length} máy cùng mẫu, cùng CPU`;
       reasons.push(peerDiff > 0 ? good(text) : warn(text));
     }
   }
 
-  return { score: blend(scores, { suggested: 1, peers: 1 }), reasons, peerDiff };
+  const cpu = cpuPart(asset, cpuSpan);
+  scores.cpu = cpu.score;
+  reasons.push(...cpu.reasons);
+
+  return { score: blend(scores, RULES.valueWeights), reasons, peerDiff, cpuScore: cpu.score, cpuYear: cpu.year };
 }
 
 function chipsFor(asset, win, value, condition) {
@@ -226,8 +255,10 @@ function chipsFor(asset, win, value, condition) {
   if (asset.bid_count === 0) chips.push(good('Chưa ai đặt'));
   else if (win.duels > 0) chips.push(warn('Đang bị tranh'));
   else chips.push(info(`${asset.bid_count} lượt · ~${win.bidders} người`));
+  if (value.cpuScore != null && value.cpuScore >= 0.75) chips.push(good(`CPU đời ${value.cpuYear}`));
+  else if (value.cpuScore != null && value.cpuScore <= 0.25) chips.push(warn(`CPU đời ${value.cpuYear}`));
   if (value.peerDiff != null && value.peerDiff >= RULES.priceNoticeRatio) {
-    chips.push(good(`Rẻ hơn ${Math.round(value.peerDiff * 100)}% máy cùng mẫu`));
+    chips.push(good(`Rẻ hơn ${Math.round(value.peerDiff * 100)}% máy cùng mẫu & CPU`));
   } else {
     const better = condition.reasons.find(r => r.tone === 'good' && /nhiều hơn mức phổ biến/.test(r.text));
     if (better) chips.push(good(better.text.split(',')[0]));
@@ -252,6 +283,17 @@ export function buildInsights(assets, { modelOf, capturedAt }) {
     byModel.get(key).push(a);
   }
 
+  // Oldest and newest known CPU launch per category, to place each CPU between them.
+  const cpuSpans = new Map();
+  for (const a of assets) {
+    const cpu = cpuInfo(a.spec?.cpu);
+    const release = cpu && cpuRelease(cpu.model);
+    if (!release) continue;
+    const category = typeGroup(a.asset_type);
+    const span = cpuSpans.get(category) ?? { min: Infinity, max: -Infinity };
+    cpuSpans.set(category, { min: Math.min(span.min, release.year), max: Math.max(span.max, release.year) });
+  }
+
   const byId = new Map();
   for (const asset of assets) {
     const model = modelOf(asset.name);
@@ -266,12 +308,16 @@ export function buildInsights(assets, { modelOf, capturedAt }) {
       return { gb, text: specLabel(sized.find(s => s.gb === gb).raw) };
     };
     const peerSpec = enough ? { ram: typicalOf('ram'), storage: typicalOf('storage_gb') } : null;
-    const peerPrices = enough && others.length ? others.map(p => p.current_price) : null;
+    // Price is compared with same-model units that also have the same CPU: a unit that's cheaper only because
+    // it has an older CPU isn't a bargain.
+    const myCpu = cpuInfo(asset.spec?.cpu)?.model;
+    const priceTwins = myCpu ? others.filter(p => cpuInfo(p.spec?.cpu)?.model === myCpu) : others;
+    const peerPrices = priceTwins.length >= RULES.minPeers - 1 ? priceTwins.map(p => p.current_price) : null;
 
     const excluded = exclusionReasons(asset);
     const condition = conditionPart(asset, peerSpec);
     const win = winPart(asset, capturedAtMs);
-    const value = valuePart(asset, peerPrices);
+    const value = valuePart(asset, peerPrices, cpuSpans.get(typeGroup(asset.asset_type)));
     const { weights } = RULES;
     const score = Math.round(
       100 * (weights.condition * condition.score + weights.win * win.score + weights.value * value.score),

@@ -39,9 +39,7 @@ export default function InsightSummary({ categories, assetById, insightsById, ca
                   {c.eligible}/{c.total}
                 </span>
               </span>
-              <span>
-                {c.eligible ? `${c.eligibleNoBids} máy đạt chuẩn chưa ai đặt` : 'Không có máy đạt chuẩn'}
-              </span>
+              <span>{c.eligible ? `${c.eligibleNoBids} máy đạt chuẩn chưa ai đặt` : 'Không có máy đạt chuẩn'}</span>
               {top && (
                 <span className="ins-card-top">
                   Cao nhất: {top.name} · {insightsById.get(top.id).score} điểm
@@ -52,8 +50,8 @@ export default function InsightSummary({ categories, assetById, insightsById, ca
         })}
       </div>
       <div className="ins-legend">
-        Điểm = Tình trạng {pct(weights.condition)}% + Khả năng thắng {pct(weights.win)}% + Giá {pct(weights.value)}%.
-        Bấm vào máy để xem lý do chi tiết và các máy cùng mẫu.
+        Điểm = Tình trạng {pct(weights.condition)}% + Khả năng thắng {pct(weights.win)}% + Giá trị {pct(weights.value)}%
+        (giá và đời CPU). Bấm vào máy để xem lý do chi tiết và các máy cùng mẫu.
       </div>
     </div>
   );

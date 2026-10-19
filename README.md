@@ -40,11 +40,17 @@ same model (click one to open it).
 
 - Eligible: status "Bình thường" and, for laptops/phones/tablets, battery above 50%. Everything else is left out
   with the reason shown in its popup.
-- Score (0-100) = condition 40% + chance to win 40% + price 20%:
+- Score (0-100) = condition 35% + chance to win 35% + value 30%:
   - Condition: battery 50% → 100% scaled, charger included, RAM/storage vs the model's most common config.
   - Chance to win: bid count, estimated bidders (emails are masked to one letter, so it's approximate), quick
     outbids between different people within 10 minutes, how recent the last bid was (relative to the crawl time).
-  - Price: current vs suggested price (with a CFO-approval warning below it), and vs same-model units.
+  - Value: CPU generation (half of this part), current vs suggested price (with a CFO-approval warning below it),
+    and price vs same-model units that have the same CPU.
+- CPU generation uses each CPU's launch month (`src/lib/cpuRelease.js`), scaled from the oldest to the newest CPU in
+  the same category. It measures age (efficiency, single-core speed, Windows 11 support), not raw power: an older
+  6-core i7-9750H still beats a newer 4-core i5-1135G7 on multi-core work. Intel 7th gen is flagged as not supported
+  by Windows 11. A CPU missing from the table (e.g. the listing typo "i5-11200H") isn't counted; add new models there
+  when a new auction brings them.
 - All thresholds and weights are in `src/lib/insights-config.js`; the logic is in `src/lib/insights.js`.
 - Everything is computed in the browser from `src/data/auction.json`, so `npm run crawl` + `npm run build`
   refreshes the suggestions. The summary shows the crawl time; bids placed after it aren't reflected.

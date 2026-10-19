@@ -1,5 +1,5 @@
 import { Sparkles } from 'lucide-react';
-import { batteryPercent, conditionText, statusOf } from '../lib/asset.js';
+import { batteryPercent, conditionText, cpuInfo, statusOf } from '../lib/asset.js';
 import { formatVnd } from '../lib/format.js';
 import { RULES } from '../lib/insights-config.js';
 import { scoreTone } from '../lib/insights.js';
@@ -8,7 +8,7 @@ import { ScorePill } from './InsightBits.jsx';
 const PARTS = [
   ['condition', 'Tình trạng'],
   ['win', 'Khả năng thắng'],
-  ['value', 'Giá'],
+  ['value', 'Giá trị'],
 ];
 
 function batteryCell(asset) {
@@ -70,9 +70,7 @@ export default function InsightPanel({ asset, insight, insightsById, assetById, 
           })}
         </div>
       ) : (
-        <div className="ins-excluded">
-          Không nằm trong danh sách gợi ý: {insight.excluded.join('; ')}.
-        </div>
+        <div className="ins-excluded">Không nằm trong danh sách gợi ý: {insight.excluded.join('; ')}.</div>
       )}
 
       {twins.length > 1 && (
@@ -81,9 +79,7 @@ export default function InsightPanel({ asset, insight, insightsById, assetById, 
             <span>
               Máy cùng mẫu ({twins.length}) <span className="ins-part-weight">{insight.model}</span>
             </span>
-            <span className="ins-part-weight">
-              {twins.filter(t => t.asset.bid_count === 0).length} máy chưa ai đặt
-            </span>
+            <span className="ins-part-weight">{twins.filter(t => t.asset.bid_count === 0).length} máy chưa ai đặt</span>
           </div>
           <div className="ins-twins-scroll">
             <table>
@@ -92,6 +88,7 @@ export default function InsightPanel({ asset, insight, insightsById, assetById, 
                   <th>SKU</th>
                   <th>Tình trạng</th>
                   <th>Pin</th>
+                  <th>CPU</th>
                   <th>RAM / Ổ cứng</th>
                   <th className="num">Giá hiện tại</th>
                   <th className="num">Lượt đặt</th>
@@ -111,12 +108,15 @@ export default function InsightPanel({ asset, insight, insightsById, assetById, 
                       <td className="font-mono">{t.asset.sku}</td>
                       <td>{statusOf(t.asset).nhan}</td>
                       <td>{batteryCell(t.asset)}</td>
+                      <td>{cpuInfo(t.asset.spec?.cpu)?.model ?? '-'}</td>
                       <td>
                         {t.asset.spec?.ram || '-'} / {t.asset.spec?.storage_gb || '-'}
                       </td>
                       <td className="num">{formatVnd(t.asset.current_price)}</td>
                       <td className="num">{t.asset.bid_count}</td>
-                      <td className="num">{t.insight.eligible ? t.insight.score : <span className="ins-muted">-</span>}</td>
+                      <td className="num">
+                        {t.insight.eligible ? t.insight.score : <span className="ins-muted">-</span>}
+                      </td>
                     </tr>
                   );
                 })}

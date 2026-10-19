@@ -9,11 +9,14 @@ export const RULES = {
   // A battery at or above this is called out as good.
   goodBatteryPct: 75,
 
-  weights: { condition: 0.4, win: 0.4, value: 0.2 },
+  weights: { condition: 0.35, win: 0.35, value: 0.3 },
   // Parts of "condition"; battery and charger only apply to portable devices.
   conditionWeights: { battery: 0.6, charger: 0.2, spec: 0.2 },
   // Parts of "chance to win".
   winWeights: { bids: 0.4, bidders: 0.3, duels: 0.2, recency: 0.1 },
+  // Parts of "value": price vs suggested price, price vs same-model units, CPU generation (launch date,
+  // scaled from the oldest to the newest CPU in the same category; see cpuRelease.js).
+  valueWeights: { suggested: 0.25, peers: 0.25, cpu: 0.5 },
   // Different bidders outbidding each other within this many minutes counts as a duel.
   duelMinutes: 10,
   // Same-model units needed before comparing specs and prices between them.
