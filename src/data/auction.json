@@ -435,9 +435,17 @@
       "approval": "",
       "note": "",
       "starting_price": 7500000,
-      "current_price": 5500000,
-      "bid_count": 5,
+      "current_price": 5510000,
+      "bid_count": 6,
       "bids": [
+        {
+          "id": 867,
+          "la_ban": false,
+          "bidder_email": "c***@s...",
+          "bidder_name": "",
+          "amount": 5510000,
+          "created_at": "2026-10-19T08:36:06.476117+00:00"
+        },
         {
           "id": 843,
           "la_ban": false,
@@ -3438,9 +3446,17 @@
       "approval": "",
       "note": "",
       "starting_price": 5100000,
-      "current_price": 4410000,
-      "bid_count": 22,
+      "current_price": 4420000,
+      "bid_count": 23,
       "bids": [
+        {
+          "id": 866,
+          "la_ban": false,
+          "bidder_email": "d***@s...",
+          "bidder_name": "",
+          "amount": 4420000,
+          "created_at": "2026-10-19T08:32:50.207468+00:00"
+        },
         {
           "id": 864,
           "la_ban": false,
@@ -3512,14 +3528,6 @@
           "bidder_name": "",
           "amount": 4230000,
           "created_at": "2026-10-19T04:55:38.323797+00:00"
-        },
-        {
-          "id": 768,
-          "la_ban": false,
-          "bidder_email": "m***@s...",
-          "bidder_name": "",
-          "amount": 4220000,
-          "created_at": "2026-10-19T04:55:36.677303+00:00"
         }
       ]
     },
@@ -4025,9 +4033,18 @@
       "approval": "",
       "note": "",
       "starting_price": 6300000,
-      "current_price": 6300000,
-      "bid_count": 0,
-      "bids": []
+      "current_price": 6500000,
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 868,
+          "la_ban": false,
+          "bidder_email": "hieu.luu@saigontechnology.com",
+          "bidder_name": "Hieu Luu",
+          "amount": 6500000,
+          "created_at": "2026-10-19T08:42:37.436929+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -8250,5 +8267,5 @@
       ]
     }
   ],
-  "captured_at": "2026-10-19T08:31:47.858Z"
+  "captured_at": "2026-10-19T08:49:36.614Z"
 }
