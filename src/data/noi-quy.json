@@ -1,0 +1,79 @@
+{
+  "phien_ban": "2026-09-25-2",
+  "muc": [
+    {
+      "doan": [
+        "Chỉ dành cho thành viên Saigon Technology. Mỗi người đăng nhập bằng tài khoản công ty của chính mình. Không mượn tài khoản, không đấu giá hộ người khác.",
+        "Toàn bộ tài sản là đồ đã qua sử dụng, bán theo đúng hiện trạng."
+      ],
+      "tieu_de": "1. Ai được tham gia",
+      "canh_bao": false
+    },
+    {
+      "doan": [
+        "Mỗi tài sản có một nhãn tình trạng theo ba mức. Bấm vào tài sản để xem chi tiết trước khi đấu giá.",
+        "[xanh] Bình thường | Máy chạy tốt, không ghi nhận hư hỏng. Vẫn là hàng đã qua sử dụng nên ngoại hình có hao mòn.",
+        "[cam] Có hư hỏng | Máy vẫn dùng được nhưng có bộ phận lỗi. Đọc phần mô tả để biết hỏng ở đâu.",
+        "[do] Thanh lý linh kiện | Máy không còn dùng được như một máy hoàn chỉnh. Phù hợp để lấy linh kiện hoặc mang đi sửa.",
+        "Trong bảng chi tiết:",
+        "- **Không có**: máy không kèm bộ phận đó, ví dụ không có sạc.",
+        "- **Không có thông số**: loại thiết bị này vốn không có hạng mục đó, ví dụ switch thì không có pin.",
+        "- **Không đánh giá được**: không kiểm được vì lý do khách quan, ví dụ chết nguồn, hư main.",
+        "Xem máy tận nơi: **16h30 - 17h00, từ ngày 19-Oct đến ngày 23-Oct**. Chỉ xem **ngoại hình**, không bật máy. Liên hệ theo văn phòng:",
+        "- **Orchard**: trung.nguyen, toan.bui",
+        "- **Aloha**: duc.nguyennhan, cuong.nguyen3",
+        "- **ICT**: long.nguyen2"
+      ],
+      "tieu_de": "2. Cách xem thiết bị",
+      "canh_bao": false
+    },
+    {
+      "doan": [
+        "Bước giá cố định **10.000đ cho mọi tài sản**. Mỗi lần đấu giá phải cao hơn giá hiện tại ít nhất một bước.",
+        "Mức giá phải **cách giá hiện tại một bội số của 10.000đ**. Lệch mốc thì hệ thống gợi ý hai mức gần nhất.",
+        "Được **tự nâng giá của chính mình**, kể cả khi đang giữ giá cao nhất.",
+        "Chỉ đấu giá trên trang web. Lệnh đặt giá gửi từ công cụ hay script bên ngoài trình duyệt sẽ bị từ chối.",
+        "Đã đấu giá thì **không tự huỷ được**. Đấu giá nhầm thì tạo ticket helpdesk; yêu cầu huỷ chỉ được nhận khi còn **ít nhất 8 giờ** trước khi đóng phiên. Sát giờ đóng thì không huỷ."
+      ],
+      "tieu_de": "3. Cách đặt giá",
+      "canh_bao": false
+    },
+    {
+      "doan": [
+        "Giá đề xuất là mức tham khảo, không phải giá sàn. Được phép mở bát thấp hơn.",
+        "Nếu giá thắng lúc đóng phiên vẫn thấp hơn giá đề xuất, kết quả phải được **CFO phê duyệt**. CFO không duyệt thì tài sản giữ lại cho đợt sau, phiên đó coi như không thành công."
+      ],
+      "tieu_de": "4. Đấu giá thấp hơn giá đề xuất",
+      "canh_bao": true
+    },
+    {
+      "doan": [
+        "Phiên đóng đúng thời điểm trên đồng hồ đếm ngược. Sau thời điểm đó hệ thống không nhận thêm lần đấu giá nào, kể cả khi màn hình chưa kịp cập nhật.",
+        "Khi phiên còn mở, danh tính người đấu giá được ẩn. Kết quả công bố sau khi đóng phiên và duyệt xong.",
+        "Người giữ giá cao nhất lúc đóng phiên là người thắng. Hai người cùng mức giá thì ai đấu giá trước thắng.",
+        "Kết quả gửi qua email, kèm số tiền và hình thức thanh toán của từng tài sản: **chuyển khoản** hoặc **tiền mặt**. Thu tiền mặt là yêu cầu của phòng Kế toán.",
+        "Người thắng thanh toán với kế toán phụ trách ghi trong email. **Sau khi thanh toán, bộ phận IT bàn giao thiết bị.**"
+      ],
+      "tieu_de": "5. Kết thúc phiên và nhận máy",
+      "canh_bao": false
+    },
+    {
+      "doan": [
+        "**Đấu giá là cam kết mua.** Khi đấu giá một tài sản, bạn xác nhận đã xem kỹ tình trạng máy và sẽ nhận máy nếu thắng.",
+        "Thắng mà từ chối nhận hoặc không thanh toán đúng hạn: quyền mua bị huỷ và có thể bị hạn chế tham gia các đợt sau.",
+        "Tài sản thanh lý không bảo hành, không đổi trả, không hoàn tiền."
+      ],
+      "tieu_de": "6. Trách nhiệm khi đấu giá",
+      "canh_bao": true
+    },
+    {
+      "doan": [
+        "Đẩy giá rồi bỏ không nhận, hoặc thoả thuận dìm giá: kết quả bị huỷ.",
+        "Ban tổ chức có quyền rút tài sản khỏi phiên nếu phát hiện sai sót về mô tả hoặc định giá, và sẽ thông báo cho những người đã đấu giá tài sản đó.",
+        "Mọi lần đấu giá, việc xác nhận nội quy và email kết quả đều được hệ thống ghi lại (thời điểm, địa chỉ IP, trình duyệt) để đối chiếu khi có khiếu nại."
+      ],
+      "tieu_de": "7. Lưu ý",
+      "canh_bao": false
+    }
+  ]
+}
