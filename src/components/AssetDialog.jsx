@@ -11,7 +11,9 @@ import {
   specText,
   statusOf,
 } from '../lib/asset.js';
+import { imagesFor } from '../lib/images.js';
 import Countdown from './Countdown.jsx';
+import Gallery from './Gallery.jsx';
 
 export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiThieu, onDoiGia, onDatGia, onDong }) {
   const status = statusOf(asset);
@@ -39,6 +41,7 @@ export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiT
   }, [onDong]);
 
   const summary = specSummary(asset.spec);
+  const images = imagesFor(asset);
 
   return createPortal(
     <div
@@ -85,6 +88,12 @@ export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiT
               <X className="h-4 w-4" />
             </button>
           </div>
+
+          {images.length > 0 && (
+            <div className="px-6 pt-5">
+              <Gallery key={asset.id} images={images} alt={asset.name} />
+            </div>
+          )}
 
           <div className="flex flex-col gap-6 px-6 py-5 lg:flex-row">
             <div className="min-w-0 flex-1">

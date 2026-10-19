@@ -1,0 +1,158 @@
+/* Product photo gallery. Colours follow the original theme (slate palette, primary #3b82f6). */
+.gal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gal-main {
+  position: relative;
+  height: 220px;
+  border-radius: 8px;
+  border: 1px solid rgb(71 85 105);
+  background: rgb(241 245 249);
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .gal-main {
+    height: 300px;
+  }
+}
+
+.gal-main-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  cursor: zoom-in;
+}
+
+.gal-main-btn img,
+.gal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: rgb(15 23 42 / 0.65);
+  color: rgb(241 245 249);
+  transition: background-color 0.15s;
+}
+
+.gal-nav:hover {
+  background: rgb(59 130 246);
+}
+
+.gal-prev {
+  left: 8px;
+}
+
+.gal-next {
+  right: 8px;
+}
+
+.gal-count {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 1px 8px;
+  border-radius: 9999px;
+  background: rgb(15 23 42 / 0.65);
+  color: rgb(241 245 249);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gal-thumbs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.gal-thumb {
+  flex: none;
+  width: 64px;
+  height: 48px;
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid rgb(71 85 105);
+  background: rgb(241 245 249);
+  opacity: 0.6;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+
+.gal-thumb:hover {
+  opacity: 1;
+}
+
+.gal-thumb.is-active {
+  opacity: 1;
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 1px rgb(59 130 246);
+}
+
+.gal-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.9);
+  cursor: zoom-out;
+}
+
+.gal-lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 6px;
+  background: rgb(241 245 249);
+  cursor: default;
+}
+
+.gal-lightbox .gal-nav {
+  width: 40px;
+  height: 40px;
+}
+
+.gal-lightbox .gal-prev {
+  left: 16px;
+}
+
+.gal-lightbox .gal-next {
+  right: 16px;
+}
+
+.gal-lightbox .gal-count {
+  right: 50%;
+  bottom: 16px;
+  transform: translateX(50%);
+  font-size: 12px;
+}
+
+.gal-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px;
+  border-radius: 9999px;
+  color: rgb(241 245 249);
+  background: rgb(15 23 42 / 0.65);
+}
+
+.gal-lightbox-close:hover {
+  background: rgb(59 130 246);
+}
