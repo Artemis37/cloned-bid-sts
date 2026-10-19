@@ -14,18 +14,38 @@ import {
 import { imagesFor } from '../lib/images.js';
 import Countdown from './Countdown.jsx';
 import Gallery from './Gallery.jsx';
+import InsightPanel from './InsightPanel.jsx';
 
-export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiThieu, onDoiGia, onDatGia, onDong }) {
+export default function AssetDialog({
+  asset,
+  deadline,
+  dongRoi,
+  giaNhap,
+  giaToiThieu,
+  onDoiGia,
+  onDatGia,
+  onDong,
+  insight,
+  insightsById,
+  assetById,
+  onOpenAsset,
+}) {
   const status = statusOf(asset);
   const typed = Number(giaNhap || 0);
   const startingPrice = asset.starting_price ?? 0;
   const belowSuggested =
     !dongRoi && asset.starting_price != null && asset.bid_count === 0 && typed > 0 && typed < asset.starting_price;
   const closeRef = useRef(null);
+  const overlayRef = useRef(null);
 
   useEffect(() => {
     closeRef.current?.focus();
   }, []);
+
+  // Opening a same-model unit from the analysis swaps the asset in place; start it from the top.
+  useEffect(() => {
+    if (overlayRef.current) overlayRef.current.scrollTop = 0;
+  }, [asset.id]);
 
   useEffect(() => {
     const onKey = e => {
@@ -45,6 +65,7 @@ export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiT
 
   return createPortal(
     <div
+      ref={overlayRef}
       className="fixed inset-0 z-[100] overflow-y-auto bg-black/70"
       onClick={onDong}
       role="dialog"
@@ -235,6 +256,16 @@ export default function AssetDialog({ asset, deadline, dongRoi, giaNhap, giaToiT
               )}
             </div>
           </div>
+
+          {insight && (
+            <InsightPanel
+              asset={asset}
+              insight={insight}
+              insightsById={insightsById}
+              assetById={assetById}
+              onOpenAsset={onOpenAsset}
+            />
+          )}
         </div>
       </div>
     </div>,

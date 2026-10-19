@@ -3,7 +3,7 @@
 //   images/<model folder>/   shared by every product name listed for that folder in src/data/image-groups.json
 //   images/<product name>/   fallback for names not in image-groups.json (Windows-illegal characters become "-")
 // Files are shown in file-name order (01.jpg, 02.jpg, ...).
-import groups from '../data/image-groups.json';
+import { modelOf } from './models.js';
 
 // Vite needs the glob patterns written inline, so the two calls repeat them.
 const large = import.meta.glob('/images/**/*.{jpg,jpeg,png,webp,gif,avif,JPG,JPEG,PNG,WEBP,GIF,AVIF}', {
@@ -29,11 +29,6 @@ for (const p of paths) {
   byFolder.get(folder).push({ src: large[p], thumb: thumbs[p] });
 }
 
-const folderOfName = new Map();
-for (const [folder, names] of Object.entries(groups)) {
-  for (const name of names) folderOfName.set(name.trim(), folder);
-}
-
 function folderNameFor(productName) {
   return productName
     .trim()
@@ -43,5 +38,5 @@ function folderNameFor(productName) {
 
 export function imagesFor(asset) {
   const name = asset.name.trim();
-  return byFolder.get(asset.sku) ?? byFolder.get(folderOfName.get(name)) ?? byFolder.get(folderNameFor(name)) ?? [];
+  return byFolder.get(asset.sku) ?? byFolder.get(modelOf(name)) ?? byFolder.get(folderNameFor(name)) ?? [];
 }

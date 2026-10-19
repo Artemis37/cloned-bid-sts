@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Toaster } from 'sonner';
 import './styles/app.css';
 import './styles/gallery.css';
+import './styles/insights.css';
 import AuctionPage from './AuctionPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

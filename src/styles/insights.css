@@ -1,0 +1,397 @@
+/* "Gợi ý dễ thắng" (suggestions) mode. Colours follow the original theme. */
+
+/* Switch in the filter bar */
+.ins-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(71 85 105);
+  background: rgb(30 41 59);
+  color: rgb(203 213 225);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+}
+
+.ins-switch:hover {
+  color: rgb(241 245 249);
+}
+
+.ins-switch.is-on {
+  border-color: rgb(59 130 246 / 0.5);
+  background: rgb(59 130 246 / 0.12);
+  color: rgb(96 165 250);
+}
+
+.ins-switch-track {
+  position: relative;
+  width: 26px;
+  height: 14px;
+  border-radius: 9999px;
+  background: rgb(71 85 105);
+  transition: background-color 0.15s;
+}
+
+.ins-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgb(241 245 249);
+  transition: transform 0.15s;
+}
+
+.ins-switch.is-on .ins-switch-track {
+  background: rgb(59 130 246);
+}
+
+.ins-switch.is-on .ins-switch-track::after {
+  transform: translateX(12px);
+}
+
+/* Summary panel above the list */
+.ins-summary {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgb(59 130 246 / 0.35);
+  background: rgb(59 130 246 / 0.06);
+}
+
+.ins-summary-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  font-size: 12px;
+  color: rgb(203 213 225);
+}
+
+.ins-summary-head strong {
+  color: rgb(241 245 249);
+}
+
+.ins-summary-time {
+  margin-left: auto;
+  font-size: 11px;
+  color: rgb(100 116 139);
+}
+
+.ins-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ins-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgb(71 85 105);
+  background: rgb(30 41 59);
+  text-align: left;
+  font-size: 11px;
+  color: rgb(148 163 184);
+  transition: border-color 0.15s;
+}
+
+.ins-card:hover {
+  border-color: rgb(59 130 246 / 0.6);
+}
+
+.ins-card.is-active {
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 1px rgb(59 130 246);
+}
+
+.ins-card.is-empty {
+  opacity: 0.55;
+}
+
+.ins-card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(241 245 249);
+}
+
+.ins-card-top {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgb(203 213 225);
+}
+
+.ins-legend {
+  margin-top: 8px;
+  font-size: 11px;
+  color: rgb(100 116 139);
+}
+
+/* Category divider rows in the list */
+.ins-cat-row td {
+  padding: 8px 16px;
+  background: rgb(15 23 42 / 0.6);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgb(148 163 184);
+}
+
+.ins-cat-head {
+  padding: 10px 2px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgb(148 163 184);
+}
+
+.ins-cat-count {
+  margin-left: 6px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgb(100 116 139);
+}
+
+/* Reason chips and score pill */
+.ins-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.ins-chip {
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgb(71 85 105);
+  font-size: 10px;
+  white-space: nowrap;
+  color: rgb(203 213 225);
+}
+
+.ins-chip.good {
+  border-color: rgb(34 197 94 / 0.35);
+  background: rgb(34 197 94 / 0.08);
+  color: rgb(74 222 128);
+}
+
+.ins-chip.warn {
+  border-color: rgb(245 158 11 / 0.4);
+  background: rgb(245 158 11 / 0.1);
+  color: rgb(251 191 36);
+}
+
+.ins-score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid rgb(71 85 105);
+  color: rgb(148 163 184);
+}
+
+.ins-score.good {
+  border-color: rgb(34 197 94 / 0.45);
+  background: rgb(34 197 94 / 0.12);
+  color: rgb(74 222 128);
+}
+
+.ins-score.info {
+  border-color: rgb(59 130 246 / 0.45);
+  background: rgb(59 130 246 / 0.12);
+  color: rgb(96 165 250);
+}
+
+/* Analysis section in the detail popup */
+.ins-panel {
+  border-top: 1px solid rgb(71 85 105);
+  padding: 20px 24px;
+}
+
+.ins-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.ins-panel-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgb(100 116 139);
+}
+
+.ins-panel-rank {
+  font-size: 12px;
+  color: rgb(203 213 225);
+}
+
+.ins-excluded {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(71 85 105);
+  background: rgb(51 65 85 / 0.4);
+  font-size: 12px;
+  color: rgb(203 213 225);
+}
+
+.ins-parts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .ins-parts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ins-part-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgb(241 245 249);
+}
+
+.ins-part-weight {
+  font-size: 10px;
+  color: rgb(100 116 139);
+}
+
+.ins-bar {
+  height: 6px;
+  margin: 6px 0 8px;
+  border-radius: 9999px;
+  background: rgb(51 65 85);
+  overflow: hidden;
+}
+
+.ins-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: rgb(59 130 246);
+}
+
+.ins-bar.good > span {
+  background: rgb(34 197 94);
+}
+
+.ins-bar.low > span {
+  background: rgb(245 158 11);
+}
+
+.ins-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgb(203 213 225);
+}
+
+.ins-reasons li {
+  display: flex;
+  gap: 6px;
+}
+
+.ins-reasons li::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 5px;
+  border-radius: 9999px;
+  background: rgb(100 116 139);
+}
+
+.ins-reasons li.good::before {
+  background: rgb(34 197 94);
+}
+
+.ins-reasons li.warn::before {
+  background: rgb(245 158 11);
+}
+
+.ins-twins {
+  margin-top: 18px;
+}
+
+.ins-twins-scroll {
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid rgb(71 85 105);
+  border-radius: 6px;
+}
+
+.ins-twins table {
+  width: 100%;
+  min-width: 560px;
+  font-size: 11px;
+  border-collapse: collapse;
+}
+
+.ins-twins th {
+  position: sticky;
+  top: 0;
+  padding: 6px 8px;
+  background: rgb(30 41 59);
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(100 116 139);
+}
+
+.ins-twins td {
+  padding: 6px 8px;
+  border-top: 1px solid rgb(71 85 105 / 0.5);
+  color: rgb(203 213 225);
+  white-space: nowrap;
+}
+
+.ins-twins .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ins-twins tbody tr {
+  cursor: pointer;
+}
+
+.ins-twins tbody tr:hover td {
+  background: rgb(51 65 85 / 0.4);
+}
+
+.ins-twins tr.is-current td {
+  background: rgb(59 130 246 / 0.12);
+  cursor: default;
+}
+
+.ins-muted {
+  color: rgb(100 116 139);
+}

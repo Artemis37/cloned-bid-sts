@@ -22,12 +22,26 @@ function formatBattery(v) {
   return Number.isFinite(n) ? `${Math.round(n <= 1 ? n * 100 : n)}%` : s;
 }
 
+// Battery health as a percentage ("82%", "0.8" -> 80), or null when it isn't a number.
+export function batteryPercent(value) {
+  const s = String(value ?? '').trim();
+  if (!s) return null;
+  const n = Number(s.replace(/%$/, '').replace(',', '.'));
+  return Number.isFinite(n) ? (n <= 1 ? n * 100 : n) : null;
+}
+
+// Battery recorded as fine but without a percentage ("OK").
+export function batteryMarkedOk(value) {
+  return GOOD.includes(String(value ?? '').trim().toLowerCase());
+}
+
 export function conditionText(key, value) {
   const s = String(value ?? '').trim();
   return VALUE_LABELS[s.toLowerCase()] || (key === 'battery_pct' ? formatBattery(value) : s || '-');
 }
 
-function isPortable(assetType) {
+// Laptops, phones and tablets: devices where battery and charger matter.
+export function isPortable(assetType) {
   const s = String(assetType || '')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')

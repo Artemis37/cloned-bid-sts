@@ -32,6 +32,23 @@ is listed in `src/data/image-groups.json`.
 - Run `npm run build` (or keep `npm run dev` running) to see changes. iPhone `.heic` photos aren't supported;
   export them as JPEG. Unreadable files are skipped with a warning.
 
+## "Gợi ý dễ thắng" (suggestions)
+
+The switch in the filter bar keeps only items in good shape and ranks them, per category, by how likely they are to
+be won at a fair price. The detail popup always has a "Phân tích gợi ý" section with the reasons and every unit of the
+same model (click one to open it).
+
+- Eligible: status "Bình thường" and, for laptops/phones/tablets, battery above 50%. Everything else is left out
+  with the reason shown in its popup.
+- Score (0-100) = condition 40% + chance to win 40% + price 20%:
+  - Condition: battery 50% → 100% scaled, charger included, RAM/storage vs the model's most common config.
+  - Chance to win: bid count, estimated bidders (emails are masked to one letter, so it's approximate), quick
+    outbids between different people within 10 minutes, how recent the last bid was (relative to the crawl time).
+  - Price: current vs suggested price (with a CFO-approval warning below it), and vs same-model units.
+- All thresholds and weights are in `src/lib/insights-config.js`; the logic is in `src/lib/insights.js`.
+- Everything is computed in the browser from `src/data/auction.json`, so `npm run crawl` + `npm run build`
+  refreshes the suggestions. The summary shows the crawl time; bids placed after it aren't reflected.
+
 ## Refresh the data
 
 Prices change until the auction closes. To take a new snapshot (VPN required):
