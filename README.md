@@ -65,6 +65,10 @@ The crawl drops the "your bid" markers, so the copy never reveals which bids bel
 - Only the "Đấu giá" tab; no account menu.
 - "Xác nhận đặt giá" shows a notice instead of placing a bid.
 - The detail popup shows product photos from `images/` (the original has none).
+- Extra hardware filters: RAM, CPU (by family or exact model), graphics card (with/without a discrete card, or exact
+  model), storage range, and screen size. The listings spell these inconsistently ("i7 10750H" / "i7-10750H",
+  "GTX 1050Ti" / "GTX 1050 Ti"); the parsing that merges them is in `src/lib/asset.js`, the options in
+  `src/lib/specFilters.js`.
 - Prices are frozen at the snapshot time (`captured_at` in `auction.json`); there are no live updates.
 - Follow (heart) is saved in the visitor's browser instead of on the server.
 - The session switches to "ended" when the countdown reaches the deadline.

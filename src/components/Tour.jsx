@@ -13,8 +13,8 @@ const STEPS = [
     noiDung: (
       <>
         <p>
-          Đây là sàn đấu giá nội bộ cho tài sản IT thanh lý. Xem nhanh vài bước để biết cách tìm máy và đặt giá, mất khoảng
-          một phút.
+          Đây là sàn đấu giá nội bộ cho tài sản IT thanh lý. Xem nhanh vài bước để biết cách tìm máy và đặt giá, mất
+          khoảng một phút.
         </p>
         <p className="text-t-micro">
           Bấm Bắt đầu để xem, Bỏ qua nếu đã quen. Trên máy tính dùng được phím mũi tên và Esc.
@@ -43,8 +43,9 @@ const STEPS = [
         <p>Ô tìm kiếm nhận tên máy, SKU, văn phòng hoặc cấu hình (vd: i7, 16GB).</p>
         <p>
           Lọc theo <strong>Loại thiết bị</strong>, <strong>Văn phòng</strong>, <strong>Tình trạng</strong>,{' '}
-          <strong>Mức quan tâm</strong>, <strong>RAM</strong>, <strong>CPU</strong> và khoảng{' '}
-          <strong>Giá từ / Giá đến</strong> (tính theo giá hiện tại). Trên máy tính, bấm tiêu đề cột để sắp xếp.
+          <strong>Mức quan tâm</strong>, khoảng <strong>Giá từ / Giá đến</strong> (tính theo giá hiện tại), và cấu hình:{' '}
+          <strong>RAM</strong>, <strong>CPU</strong>, <strong>Card đồ hoạ</strong>, <strong>Ổ cứng</strong>,{' '}
+          <strong>Màn hình</strong>. Trên máy tính, bấm tiêu đề cột để sắp xếp.
         </p>
       </>
     ),
@@ -149,9 +150,7 @@ function rectOf(el) {
 }
 
 function sameRect(a, b) {
-  return a && b
-    ? a.top === b.top && a.left === b.left && a.width === b.width && a.height === b.height
-    : a === b;
+  return a && b ? a.top === b.top && a.left === b.left && a.width === b.width && a.height === b.height : a === b;
 }
 
 export default function Tour({ step, onStep }) {
@@ -353,7 +352,10 @@ export default function Tour({ step, onStep }) {
           </div>
           <div className="ml-auto flex gap-2">
             {step === 0 ? (
-              <button onClick={close} className="rounded-lg px-3 py-1.5 text-[12px] font-medium text-t-muted hover:text-t-primary">
+              <button
+                onClick={close}
+                className="rounded-lg px-3 py-1.5 text-[12px] font-medium text-t-muted hover:text-t-primary"
+              >
                 Bỏ qua
               </button>
             ) : (

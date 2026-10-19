@@ -8,23 +8,14 @@ import SortHeader from './components/SortHeader.jsx';
 import AssetDialog from './components/AssetDialog.jsx';
 import InsightSummary from './components/InsightSummary.jsx';
 import { Chips, ScorePill } from './components/InsightBits.jsx';
-import {
-  CPU_FAMILY_ORDER,
-  STATUS,
-  TYPE_GROUP_ORDER,
-  cpuInfo,
-  minimumBid,
-  sizeGb,
-  specSummary,
-  statusKey,
-  statusOf,
-  typeGroup,
-} from './lib/asset.js';
+import SpecFilters from './components/SpecFilters.jsx';
+import { STATUS, TYPE_GROUP_ORDER, minimumBid, specSummary, statusKey, statusOf, typeGroup } from './lib/asset.js';
 import { formatDigits, formatVnd } from './lib/format.js';
 import { inPriceRange, sortRows, useSort } from './lib/sort.js';
 import { loadFollowed, saveFollowed } from './lib/follow.js';
 import { buildInsights } from './lib/insights.js';
 import { modelOf } from './lib/models.js';
+import { NO_SPEC_FILTERS, matchesSpecFilters, specFilterOptions } from './lib/specFilters.js';
 
 const STATUS_RANK = { binh_thuong: 0, hu_hong: 1, linh_kien: 2, chua_ro: 3 };
 const MAX_TIMEOUT_MS = 2 ** 31 - 1;
@@ -33,43 +24,7 @@ const MAX_TIMEOUT_MS = 2 ** 31 - 1;
 const INSIGHTS = buildInsights(auction.assets, { modelOf, capturedAt: auction.captured_at });
 const ASSET_BY_ID = new Map(auction.assets.map(a => [a.id, a]));
 const CATEGORY_INDEX = Object.fromEntries(TYPE_GROUP_ORDER.map((c, i) => [c, i]));
-
-// RAM sizes present in the data, smallest first: [[16, count], ...].
-function ramOptionsOf(assets) {
-  const counts = new Map();
-  for (const a of assets) {
-    const gb = sizeGb(a.spec?.ram);
-    if (gb != null) counts.set(gb, (counts.get(gb) || 0) + 1);
-  }
-  return [...counts].sort((x, y) => x[0] - y[0]);
-}
-
-// CPU models grouped by family; newest model numbers first, "unknown generation" last.
-function cpuGroupsOf(assets) {
-  const families = new Map();
-  for (const a of assets) {
-    const cpu = cpuInfo(a.spec?.cpu);
-    if (!cpu) continue;
-    if (!families.has(cpu.family)) families.set(cpu.family, new Map());
-    const models = families.get(cpu.family);
-    models.set(cpu.model, (models.get(cpu.model) || 0) + 1);
-  }
-  const modelNumber = model => Number(model.match(/\d{4,5}/)?.[0] ?? -1);
-  return CPU_FAMILY_ORDER.filter(f => families.has(f)).map(family => {
-    const models = [...families.get(family)].sort(
-      (x, y) => modelNumber(y[0]) - modelNumber(x[0]) || x[0].localeCompare(y[0]),
-    );
-    return { family, total: models.reduce((n, [, count]) => n + count, 0), models };
-  });
-}
-
-// cpu filter value: 'all', 'family:<family>' or an exact model.
-function matchesCpu(asset, value) {
-  if (value === 'all') return true;
-  const cpu = cpuInfo(asset.spec?.cpu);
-  if (!cpu) return false;
-  return value.startsWith('family:') ? cpu.family === value.slice('family:'.length) : cpu.model === value;
-}
+const SPEC_OPTIONS = specFilterOptions(auction.assets);
 
 // Suggestions list: grouped by category; inside each, by the chosen column or else by suggestion rank.
 function suggestionOrder(rows, sort) {
@@ -138,8 +93,7 @@ export default function AuctionPage() {
   const [office, setOffice] = useState('all');
   const [status, setStatus] = useState('all');
   const [type, setType] = useState('all');
-  const [ram, setRam] = useState('all');
-  const [cpu, setCpu] = useState('all');
+  const [specs, setSpecs] = useState(NO_SPEC_FILTERS);
   const [priceFrom, setPriceFrom] = useState('');
   const [priceTo, setPriceTo] = useState('');
   const [priceFocused, setPriceFocused] = useState(false);
@@ -183,8 +137,6 @@ export default function AuctionPage() {
     acc[k] = (acc[k] || 0) + 1;
     return acc;
   }, {});
-  const ramOptions = ramOptionsOf(assets);
-  const cpuGroups = cpuGroupsOf(assets);
 
   const filtered = assets.filter(a => {
     const q = search.toLowerCase();
@@ -205,8 +157,7 @@ export default function AuctionPage() {
       (office === 'all' || (a.office || '') === office) &&
       (status === 'all' || statusKey(a) === status) &&
       (type === 'all' || typeGroup(a.asset_type) === type) &&
-      (ram === 'all' || String(sizeGb(a.spec?.ram)) === ram) &&
-      matchesCpu(a, cpu) &&
+      matchesSpecFilters(a, specs) &&
       inPriceRange(a.current_price, priceFrom, priceTo) &&
       (!suggest || INSIGHTS.byId.get(a.id).eligible)
     );
@@ -228,16 +179,14 @@ export default function AuctionPage() {
     office !== 'all' ||
     status !== 'all' ||
     interest !== 'all' ||
-    ram !== 'all' ||
-    cpu !== 'all' ||
+    Object.values(specs).some(v => v !== 'all') ||
     priceFrom !== '' ||
     priceTo !== '';
   function clearFilters() {
     setSuggest(false);
     setSearch('');
     setType('all');
-    setRam('all');
-    setCpu('all');
+    setSpecs(NO_SPEC_FILTERS);
     setOffice('all');
     setStatus('all');
     setInterest('all');
@@ -359,45 +308,6 @@ export default function AuctionPage() {
             <option value="has_bids">Đã có người trả giá</option>
             <option value="no_bids">Chưa ai trả giá</option>
           </select>
-          <select
-            className={`flex-1 sm:flex-none rounded-lg border bg-surface px-3 py-2 text-xs focus:outline-none ${
-              ram === 'all' ? 'border-border text-t-secondary' : 'border-primary/40 text-primary'
-            }`}
-            value={ram}
-            onChange={e => setRam(e.target.value)}
-            title="Lọc theo dung lượng RAM"
-          >
-            <option value="all">RAM</option>
-            {ramOptions.map(([gb, n]) => (
-              <option key={gb} value={String(gb)}>
-                {gb}GB ({n})
-              </option>
-            ))}
-          </select>
-          <select
-            className={`flex-1 sm:flex-none rounded-lg border bg-surface px-3 py-2 text-xs focus:outline-none ${
-              cpu === 'all' ? 'border-border text-t-secondary' : 'border-primary/40 text-primary'
-            }`}
-            value={cpu}
-            onChange={e => setCpu(e.target.value)}
-            title="Lọc theo CPU: cả dòng (vd. Core i7) hoặc đúng model"
-          >
-            <option value="all">CPU</option>
-            {cpuGroups.map(g => (
-              <optgroup key={g.family} label={`${g.family} (${g.total})`}>
-                {g.models.length > 1 && (
-                  <option value={`family:${g.family}`}>
-                    Tất cả {g.family} ({g.total})
-                  </option>
-                )}
-                {g.models.map(([model, n]) => (
-                  <option key={model} value={model}>
-                    {model} ({n})
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
           <div className="flex w-full items-center gap-1 sm:w-auto" title="Lọc theo giá hiện tại, gồm cả hai đầu">
             {[
               { nhan: 'Giá từ', giaTri: priceFrom, doi: setPriceFrom },
@@ -435,6 +345,11 @@ export default function AuctionPage() {
               Xoá bộ lọc
             </button>
           )}
+          <SpecFilters
+            options={SPEC_OPTIONS}
+            values={specs}
+            onChange={(key, value) => setSpecs(prev => ({ ...prev, [key]: value }))}
+          />
         </div>
 
         {hasFilter && (

@@ -233,6 +233,48 @@ export function cpuInfo(cpu) {
   return { family: 'Khác', model: s };
 }
 
+export const GPU_BRAND_ORDER = ['NVIDIA', 'AMD', 'Intel', 'Khác'];
+
+// Listings name the Bravo 15's mobile RX 5500M as "RX5500".
+const GPU_ALIASES = { 'RX 5500': 'RX 5500M' };
+
+// GPU normalised for filtering: "GTX 1050Ti" -> "GTX 1050 Ti", "RX5500" -> "RX 5500M".
+// "No" means no discrete card ({ discrete: false, model: null }); NA/unknown gives null.
+export function gpuInfo(gpu) {
+  const s = String(gpu ?? '').trim();
+  if (!s || SPEC_EMPTY.includes(s.toLowerCase())) return null;
+  if (/^(no|none|không( có)?)$/i.test(s)) return { brand: null, model: null, discrete: false };
+  let model = s
+    .replace(/\s+/g, ' ')
+    .replace(/^(gtx|rtx|rx)\s*(?=\d)/i, p => `${p.trim().toUpperCase()} `)
+    .replace(/\s*ti$/i, ' Ti');
+  model = GPU_ALIASES[model] ?? model;
+  if (/^(gtx|rtx|mx|quadro)\b|^\d+mx$/i.test(model)) return { brand: 'NVIDIA', model, discrete: true };
+  if (/^(rx|r[579]|amd|radeon)\b/i.test(model)) return { brand: 'AMD', model, discrete: true };
+  if (/intel|iris|uhd/i.test(model)) return { brand: 'Intel', model, discrete: false };
+  return { brand: 'Khác', model, discrete: false };
+}
+
+// Storage for filtering: { gb } from "1TB + 128GB"; { missing: true } for "Không ổ cứng" / "Removed" / "Hư SSD"; else null.
+export function storageInfo(value) {
+  const s = String(value ?? '').trim();
+  if (!s || SPEC_EMPTY.includes(s.toLowerCase())) return null;
+  if (/không ổ|removed|hư|hỏng|tháo/i.test(s)) return { missing: true };
+  const gb = sizeGb(s);
+  return gb == null ? null : { gb };
+}
+
+// Screen size in inches from "15.6" / "15,6\"", or null.
+export function screenInches(value) {
+  const n = Number(
+    String(value ?? '')
+      .trim()
+      .replace(',', '.')
+      .replace(/["”″]|inch/gi, ''),
+  );
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
 export const CONDITION_LABELS = {
   power: 'Nguồn',
   overview: 'Tổng quan',
