@@ -37,9 +37,33 @@
       "approval": "",
       "note": "",
       "starting_price": 7500000,
-      "current_price": 5300000,
-      "bid_count": 12,
+      "current_price": 5510000,
+      "bid_count": 15,
       "bids": [
+        {
+          "id": 836,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 5510000,
+          "created_at": "2026-10-19T07:24:23.052106+00:00"
+        },
+        {
+          "id": 810,
+          "la_ban": false,
+          "bidder_email": "c***@s...",
+          "bidder_name": "",
+          "amount": 5500000,
+          "created_at": "2026-10-19T06:20:07.972169+00:00"
+        },
+        {
+          "id": 806,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 5410000,
+          "created_at": "2026-10-19T06:16:28.599430+00:00"
+        },
         {
           "id": 793,
           "la_ban": false,
@@ -95,30 +119,6 @@
           "bidder_name": "",
           "amount": 4260000,
           "created_at": "2026-10-19T04:21:26.973921+00:00"
-        },
-        {
-          "id": 701,
-          "la_ban": false,
-          "bidder_email": "c***@s...",
-          "bidder_name": "",
-          "amount": 4150000,
-          "created_at": "2026-10-19T04:20:54.941522+00:00"
-        },
-        {
-          "id": 691,
-          "la_ban": false,
-          "bidder_email": "v***@s...",
-          "bidder_name": "",
-          "amount": 4140000,
-          "created_at": "2026-10-19T04:17:10.106686+00:00"
-        },
-        {
-          "id": 688,
-          "la_ban": false,
-          "bidder_email": "c***@s...",
-          "bidder_name": "",
-          "amount": 4030000,
-          "created_at": "2026-10-19T04:16:42.185183+00:00"
         }
       ]
     },
@@ -313,9 +313,17 @@
       "approval": "",
       "note": "",
       "starting_price": 7500000,
-      "current_price": 5010000,
-      "bid_count": 2,
+      "current_price": 5020000,
+      "bid_count": 3,
       "bids": [
+        {
+          "id": 797,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 5020000,
+          "created_at": "2026-10-19T06:01:26.489306+00:00"
+        },
         {
           "id": 796,
           "la_ban": false,
@@ -411,9 +419,17 @@
       "approval": "",
       "note": "",
       "starting_price": 7500000,
-      "current_price": 5300000,
-      "bid_count": 3,
+      "current_price": 5310000,
+      "bid_count": 4,
       "bids": [
+        {
+          "id": 831,
+          "la_ban": false,
+          "bidder_email": "h***@s...",
+          "bidder_name": "",
+          "amount": 5310000,
+          "created_at": "2026-10-19T07:12:07.076624+00:00"
+        },
         {
           "id": 794,
           "la_ban": false,
@@ -525,9 +541,17 @@
       "approval": "",
       "note": "",
       "starting_price": 6800000,
-      "current_price": 5010000,
-      "bid_count": 2,
+      "current_price": 5020000,
+      "bid_count": 3,
       "bids": [
+        {
+          "id": 799,
+          "la_ban": false,
+          "bidder_email": "u***@s...",
+          "bidder_name": "",
+          "amount": 5020000,
+          "created_at": "2026-10-19T06:03:25.128641+00:00"
+        },
         {
           "id": 795,
           "la_ban": false,
@@ -2153,9 +2177,18 @@
       "approval": "",
       "note": "",
       "starting_price": 7300000,
-      "current_price": 7300000,
-      "bid_count": 0,
-      "bids": []
+      "current_price": 5000000,
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 824,
+          "la_ban": false,
+          "bidder_email": "d***@s...",
+          "bidder_name": "",
+          "amount": 5000000,
+          "created_at": "2026-10-19T06:44:25.372768+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -2540,9 +2573,25 @@
       "approval": "",
       "note": "Màn hình: Nhấp nháy màn hình",
       "starting_price": 5000000,
-      "current_price": 4710000,
-      "bid_count": 6,
+      "current_price": 4730000,
+      "bid_count": 8,
       "bids": [
+        {
+          "id": 835,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4730000,
+          "created_at": "2026-10-19T07:24:15.182293+00:00"
+        },
+        {
+          "id": 826,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4720000,
+          "created_at": "2026-10-19T06:58:14.700953+00:00"
+        },
         {
           "id": 708,
           "la_ban": false,
@@ -2922,9 +2971,17 @@
       "approval": "",
       "note": "Màn hình: Ám màn",
       "starting_price": 2000000,
-      "current_price": 1500000,
-      "bid_count": 1,
+      "current_price": 1560000,
+      "bid_count": 2,
       "bids": [
+        {
+          "id": 818,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 1560000,
+          "created_at": "2026-10-19T06:30:00.615859+00:00"
+        },
         {
           "id": 638,
           "la_ban": false,
@@ -3039,9 +3096,17 @@
       "approval": "",
       "note": "",
       "starting_price": 200000,
-      "current_price": 200000,
-      "bid_count": 1,
+      "current_price": 210000,
+      "bid_count": 2,
       "bids": [
+        {
+          "id": 798,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 210000,
+          "created_at": "2026-10-19T06:02:41.355811+00:00"
+        },
         {
           "id": 788,
           "la_ban": false,
@@ -3309,9 +3374,49 @@
       "approval": "",
       "note": "",
       "starting_price": 5100000,
-      "current_price": 4230000,
-      "bid_count": 14,
+      "current_price": 4380000,
+      "bid_count": 19,
       "bids": [
+        {
+          "id": 834,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4380000,
+          "created_at": "2026-10-19T07:24:09.416199+00:00"
+        },
+        {
+          "id": 816,
+          "la_ban": false,
+          "bidder_email": "u***@s...",
+          "bidder_name": "",
+          "amount": 4370000,
+          "created_at": "2026-10-19T06:25:31.689474+00:00"
+        },
+        {
+          "id": 815,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4360000,
+          "created_at": "2026-10-19T06:23:45.507753+00:00"
+        },
+        {
+          "id": 814,
+          "la_ban": false,
+          "bidder_email": "u***@s...",
+          "bidder_name": "",
+          "amount": 4300000,
+          "created_at": "2026-10-19T06:21:43.858455+00:00"
+        },
+        {
+          "id": 812,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4290000,
+          "created_at": "2026-10-19T06:21:18.423408+00:00"
+        },
         {
           "id": 769,
           "la_ban": false,
@@ -3351,46 +3456,6 @@
           "bidder_name": "",
           "amount": 4140000,
           "created_at": "2026-10-19T04:55:17.641678+00:00"
-        },
-        {
-          "id": 764,
-          "la_ban": false,
-          "bidder_email": "u***@s...",
-          "bidder_name": "",
-          "amount": 4130000,
-          "created_at": "2026-10-19T04:54:31.963292+00:00"
-        },
-        {
-          "id": 763,
-          "la_ban": false,
-          "bidder_email": "m***@s...",
-          "bidder_name": "",
-          "amount": 4120000,
-          "created_at": "2026-10-19T04:54:29.098699+00:00"
-        },
-        {
-          "id": 762,
-          "la_ban": false,
-          "bidder_email": "u***@s...",
-          "bidder_name": "",
-          "amount": 4060000,
-          "created_at": "2026-10-19T04:54:24.491613+00:00"
-        },
-        {
-          "id": 761,
-          "la_ban": false,
-          "bidder_email": "m***@s...",
-          "bidder_name": "",
-          "amount": 4050000,
-          "created_at": "2026-10-19T04:54:21.049075+00:00"
-        },
-        {
-          "id": 760,
-          "la_ban": false,
-          "bidder_email": "u***@s...",
-          "bidder_name": "",
-          "amount": 4040000,
-          "created_at": "2026-10-19T04:54:16.455007+00:00"
         }
       ]
     },
@@ -3479,9 +3544,33 @@
       "approval": "",
       "note": "Màn hình: Lỗi màn hình",
       "starting_price": 5000000,
-      "current_price": 4040000,
-      "bid_count": 5,
+      "current_price": 4080000,
+      "bid_count": 8,
       "bids": [
+        {
+          "id": 833,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4080000,
+          "created_at": "2026-10-19T07:24:01.799848+00:00"
+        },
+        {
+          "id": 827,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4060000,
+          "created_at": "2026-10-19T06:58:36.019271+00:00"
+        },
+        {
+          "id": 807,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 4050000,
+          "created_at": "2026-10-19T06:17:00.715653+00:00"
+        },
         {
           "id": 712,
           "la_ban": false,
@@ -3601,9 +3690,17 @@
       "approval": "",
       "note": "",
       "starting_price": 5100000,
-      "current_price": 4170000,
-      "bid_count": 11,
+      "current_price": 4180000,
+      "bid_count": 12,
       "bids": [
+        {
+          "id": 832,
+          "la_ban": false,
+          "bidder_email": "d***@s...",
+          "bidder_name": "",
+          "amount": 4180000,
+          "created_at": "2026-10-19T07:21:46.831501+00:00"
+        },
         {
           "id": 777,
           "la_ban": false,
@@ -3675,14 +3772,6 @@
           "bidder_name": "",
           "amount": 4040000,
           "created_at": "2026-10-19T04:46:04.617201+00:00"
-        },
-        {
-          "id": 630,
-          "la_ban": false,
-          "bidder_email": "u***@s...",
-          "bidder_name": "",
-          "amount": 4010000,
-          "created_at": "2026-10-19T03:58:08.341019+00:00"
         }
       ]
     },
@@ -4034,9 +4123,17 @@
       "approval": "",
       "note": "Kén hub Urgeent 4k30p",
       "starting_price": 500000,
-      "current_price": 880000,
-      "bid_count": 17,
+      "current_price": 890000,
+      "bid_count": 18,
       "bids": [
+        {
+          "id": 823,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 890000,
+          "created_at": "2026-10-19T06:39:28.566931+00:00"
+        },
         {
           "id": 779,
           "la_ban": false,
@@ -4108,14 +4205,6 @@
           "bidder_name": "",
           "amount": 800000,
           "created_at": "2026-10-19T04:27:32.904822+00:00"
-        },
-        {
-          "id": 713,
-          "la_ban": false,
-          "bidder_email": "h***@s...",
-          "bidder_name": "",
-          "amount": 600000,
-          "created_at": "2026-10-19T04:25:04.203680+00:00"
         }
       ]
     },
@@ -4241,9 +4330,65 @@
       "approval": "",
       "note": "Kén hub Urgeent 4k30p",
       "starting_price": 500000,
-      "current_price": 720000,
-      "bid_count": 17,
+      "current_price": 800000,
+      "bid_count": 24,
       "bids": [
+        {
+          "id": 825,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 800000,
+          "created_at": "2026-10-19T06:52:12.153137+00:00"
+        },
+        {
+          "id": 822,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 790000,
+          "created_at": "2026-10-19T06:39:16.572444+00:00"
+        },
+        {
+          "id": 820,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 780000,
+          "created_at": "2026-10-19T06:34:56.032402+00:00"
+        },
+        {
+          "id": 813,
+          "la_ban": false,
+          "bidder_email": "n***@s...",
+          "bidder_name": "",
+          "amount": 760000,
+          "created_at": "2026-10-19T06:21:23.602392+00:00"
+        },
+        {
+          "id": 802,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 750000,
+          "created_at": "2026-10-19T06:12:04.558374+00:00"
+        },
+        {
+          "id": 801,
+          "la_ban": false,
+          "bidder_email": "n***@s...",
+          "bidder_name": "",
+          "amount": 740000,
+          "created_at": "2026-10-19T06:09:52.969383+00:00"
+        },
+        {
+          "id": 800,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 730000,
+          "created_at": "2026-10-19T06:05:52.662666+00:00"
+        },
         {
           "id": 781,
           "la_ban": false,
@@ -4267,62 +4412,6 @@
           "bidder_name": "",
           "amount": 700000,
           "created_at": "2026-10-19T04:59:19.326420+00:00"
-        },
-        {
-          "id": 738,
-          "la_ban": false,
-          "bidder_email": "b***@s...",
-          "bidder_name": "",
-          "amount": 690000,
-          "created_at": "2026-10-19T04:44:58.979353+00:00"
-        },
-        {
-          "id": 736,
-          "la_ban": false,
-          "bidder_email": "t***@s...",
-          "bidder_name": "",
-          "amount": 680000,
-          "created_at": "2026-10-19T04:43:31.044812+00:00"
-        },
-        {
-          "id": 735,
-          "la_ban": false,
-          "bidder_email": "t***@s...",
-          "bidder_name": "",
-          "amount": 670000,
-          "created_at": "2026-10-19T04:43:19.395558+00:00"
-        },
-        {
-          "id": 734,
-          "la_ban": false,
-          "bidder_email": "t***@s...",
-          "bidder_name": "",
-          "amount": 660000,
-          "created_at": "2026-10-19T04:43:17.829788+00:00"
-        },
-        {
-          "id": 729,
-          "la_ban": false,
-          "bidder_email": "t***@s...",
-          "bidder_name": "",
-          "amount": 650000,
-          "created_at": "2026-10-19T04:38:24.168604+00:00"
-        },
-        {
-          "id": 725,
-          "la_ban": false,
-          "bidder_email": "h***@s...",
-          "bidder_name": "",
-          "amount": 640000,
-          "created_at": "2026-10-19T04:35:42.469490+00:00"
-        },
-        {
-          "id": 724,
-          "la_ban": false,
-          "bidder_email": "h***@s...",
-          "bidder_name": "",
-          "amount": 630000,
-          "created_at": "2026-10-19T04:35:08.774483+00:00"
         }
       ]
     },
@@ -6045,8 +6134,17 @@
       "note": "",
       "starting_price": 2000000,
       "current_price": 2000000,
-      "bid_count": 0,
-      "bids": []
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 829,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 2000000,
+          "created_at": "2026-10-19T07:04:44.627692+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -6188,9 +6286,17 @@
       "approval": "",
       "note": "Loa: loa rè; Pin: HỎNG PIN",
       "starting_price": 2000000,
-      "current_price": 2000000,
-      "bid_count": 1,
+      "current_price": 2010000,
+      "bid_count": 2,
       "bids": [
+        {
+          "id": 828,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 2010000,
+          "created_at": "2026-10-19T07:04:42.771105+00:00"
+        },
         {
           "id": 756,
           "la_ban": false,
@@ -6269,9 +6375,25 @@
       "approval": "",
       "note": "",
       "starting_price": 500000,
-      "current_price": 510000,
-      "bid_count": 1,
+      "current_price": 530000,
+      "bid_count": 3,
       "bids": [
+        {
+          "id": 830,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 530000,
+          "created_at": "2026-10-19T07:06:34.196202+00:00"
+        },
+        {
+          "id": 803,
+          "la_ban": false,
+          "bidder_email": "h***@s...",
+          "bidder_name": "",
+          "amount": 520000,
+          "created_at": "2026-10-19T06:12:58.955757+00:00"
+        },
         {
           "id": 640,
           "la_ban": false,
@@ -6396,8 +6518,17 @@
       "note": "Tổng thể: lỗi cổng hdmi | Lỗi cổng HDMI",
       "starting_price": 500000,
       "current_price": 500000,
-      "bid_count": 0,
-      "bids": []
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 808,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 500000,
+          "created_at": "2026-10-19T06:17:05.521392+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -6620,9 +6751,17 @@
       "approval": "",
       "note": "",
       "starting_price": 3800000,
-      "current_price": 3800000,
-      "bid_count": 1,
+      "current_price": 3850000,
+      "bid_count": 2,
       "bids": [
+        {
+          "id": 811,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 3850000,
+          "created_at": "2026-10-19T06:20:10.800464+00:00"
+        },
         {
           "id": 689,
           "la_ban": false,
@@ -7624,8 +7763,17 @@
       "note": "",
       "starting_price": 100000,
       "current_price": 100000,
-      "bid_count": 0,
-      "bids": []
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 805,
+          "la_ban": false,
+          "bidder_email": "h***@s...",
+          "bidder_name": "",
+          "amount": 100000,
+          "created_at": "2026-10-19T06:14:43.708196+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -7748,9 +7896,18 @@
       "approval": "",
       "note": "",
       "starting_price": 300000,
-      "current_price": 300000,
-      "bid_count": 0,
-      "bids": []
+      "current_price": 150000,
+      "bid_count": 1,
+      "bids": [
+        {
+          "id": 819,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 150000,
+          "created_at": "2026-10-19T06:31:30.356072+00:00"
+        }
+      ]
     },
     {
       "bid_step_effective": 10000,
@@ -7890,9 +8047,25 @@
       "approval": "",
       "note": "",
       "starting_price": 300000,
-      "current_price": 300000,
-      "bid_count": 1,
+      "current_price": 320000,
+      "bid_count": 3,
       "bids": [
+        {
+          "id": 809,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 320000,
+          "created_at": "2026-10-19T06:17:37.165873+00:00"
+        },
+        {
+          "id": 804,
+          "la_ban": false,
+          "bidder_email": "v***@s...",
+          "bidder_name": "",
+          "amount": 310000,
+          "created_at": "2026-10-19T06:13:11.571529+00:00"
+        },
         {
           "id": 786,
           "la_ban": false,
@@ -7935,9 +8108,25 @@
       "approval": "",
       "note": "",
       "starting_price": 300000,
-      "current_price": 310000,
-      "bid_count": 2,
+      "current_price": 330000,
+      "bid_count": 4,
       "bids": [
+        {
+          "id": 821,
+          "la_ban": false,
+          "bidder_email": "t***@s...",
+          "bidder_name": "",
+          "amount": 330000,
+          "created_at": "2026-10-19T06:36:29.683129+00:00"
+        },
+        {
+          "id": 817,
+          "la_ban": false,
+          "bidder_email": "h***@s...",
+          "bidder_name": "",
+          "amount": 320000,
+          "created_at": "2026-10-19T06:29:18.210340+00:00"
+        },
         {
           "id": 787,
           "la_ban": false,
@@ -7957,5 +8146,5 @@
       ]
     }
   ],
-  "captured_at": "2026-10-19T05:56:02.075Z"
+  "captured_at": "2026-10-19T07:35:27.669Z"
 }
